@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "pyfabric",
+  "version": "${version}",
+  "name": "PyFabric",
+  "description": "This mod creates a websocket emitting and receiving python websocket requests",
+  "authors": [
+    "Tobero"
+  ],
+  "contact": {
+    "website": " https://www.paypal.com/donate/?hosted_button_id=BGB6QWR886Q6Y"
+  },
+  "license": "MIT",
+  "icon": "assets/PyFabric/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "io.github.toberocat.pyfabric.client.PyFabricClient"
+    ],
+    "main": [
+      "io.github.toberocat.pyfabric.PyFabric"
+    ]
+  },
+  "mixins": [
+    "PyFabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.8",
+    "fabric": "*",
+    "minecraft": "1.19"
+  }
+}
