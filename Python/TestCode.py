@@ -4,8 +4,8 @@ from Minecraft.Events.EventType import EventType
 Minecraft = Fabric.create()
 
 
-@Minecraft.on(EventType.JOIN_WORLD)
+@Minecraft.on(EventType.JOIN)
 def join_world():
-    print("loaded world")
+    print("Loaded world")
     player = Minecraft.get_client_player()
-    print(player)
+    print(player.location)  # Only parsed value

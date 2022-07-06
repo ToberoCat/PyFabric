@@ -3,17 +3,12 @@ from Minecraft.Networking.Client import Client
 
 class Location:
     def __init__(self, uuid: str, client: Client):
-        print("requesting")
-        self.x = client.request_float("get_entity_x", 0, uuid)
-        self.y = client.request_float("get_entity_y", 0, uuid)
-        self.z = client.request_float("get_entity_z", 0, uuid)
-        self.yaw = client.request_float("get_entity_yaw", 0, uuid)
-        self.pitch = client.request_float("get_entity_pitch", 0, uuid)
-        self.world = client.request_float("get_entity_world", 0, uuid)
+        raw_location = client.request("get_entity_location", uuid)
+        self.x, self.y, self.z, self.yaw, self.pitch = raw_location["data"]
 
     def __str__(self):
-        return "location:{x:%d,y:%d,z:%d,yaw:%d,pitch:%d,world:%s}" % (
-            self.x, self.y, self.z, self.yaw, self.pitch, self.world)
+        return "location:{x:~%d,y:~%d,z:~%d,yaw:~%d,pitch:~%d}" % (
+            self.x, self.y, self.z, self.yaw, self.pitch)
 
 
 class Inventory:

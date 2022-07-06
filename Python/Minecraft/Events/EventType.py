@@ -2,5 +2,6 @@ from enum import Enum
 
 
 class EventType(Enum):
-    JOIN_WORLD = "join_world"
+    JOIN = "joined"
+    QUIT = "quit"
     PLAYER_MOVED = "player_moved"
