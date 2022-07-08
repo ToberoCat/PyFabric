@@ -1,6 +1,6 @@
 from Minecraft.Events.EventType import EventType
 from Minecraft.Networking.Client import Client
-from Minecraft.Entity.Entity import Player
+from Minecraft.Entity.Entity import Player, Entity, Location
 from pyee.base import EventEmitter
 
 
@@ -16,6 +16,11 @@ class Fabric(EventEmitter):
         if not self.client.connected:
             return None
         return Player(self.client)
+
+    def get_entity(self, uuid):
+        if not self.client.connected:
+            return None
+        return Entity(uuid, Location(uuid, self.client))
 
     def get_world(self):
         if not self.client.connected:

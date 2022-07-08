@@ -1,7 +1,6 @@
 package io.github.toberocat.pyfabric.server;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
@@ -18,9 +17,9 @@ import java.util.function.Consumer;
 public abstract class AbstractServer implements Runnable {
 
     private final ServerSocket server;
-    private final ObjectMapper mapper;
     private final LinkedHashMap<String, BiConsumer<List<Object>, Consumer<Package>>> methods;
     protected final Logger logger;
+    private Gson gson;
 
 
     private Socket connected;
@@ -36,8 +35,8 @@ public abstract class AbstractServer implements Runnable {
         }
         this.server = server1;
         this.running = true;
-        this.mapper = new ObjectMapper();
         this.methods = new LinkedHashMap<>();
+        this.gson = new Gson();
         this.logger = logger;
     }
 
@@ -58,11 +57,11 @@ public abstract class AbstractServer implements Runnable {
     }
 
     private Package parsePackage(@NotNull String raw) throws IOException {
-        return mapper.readValue(raw, Package.class);
+        return gson.fromJson(raw, Package.class);
     }
 
     private String packToString(Package pack) throws IOException {
-        return mapper.writeValueAsString(pack);
+        return gson.toJson(pack);
     }
 
     protected void pythonJoined() {

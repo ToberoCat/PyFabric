@@ -5,15 +5,16 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.Session;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
+import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.stream.StreamSupport;
-
-import org.slf4j.Logger;
 
 public class Server extends AbstractServer {
 
@@ -36,7 +37,7 @@ public class Server extends AbstractServer {
     }
 
     private void registerEntityGetters() {
-        registerEntityGetter("location", (uuid -> {
+        registerEntityGetter("location", uuid -> {
             List<Object> objects = new ArrayList<>();
 
             ClientWorld world = MinecraftClient.getInstance().world;
@@ -59,21 +60,83 @@ public class Server extends AbstractServer {
             objects.add(entity.getYaw());
             objects.add(entity.getPitch());
             return objects;
-        }));
+        });
 
+        registerEntityGetter("dimension", uuid -> {
+            List<Object> objects = new ArrayList<>();
+
+            ClientWorld world = MinecraftClient.getInstance().world;
+            if (world == null) {
+                objects.add("Client world is null");
+                return objects;
+            }
+
+            Entity entity = StreamSupport.stream(world.getEntities().spliterator(), false)
+                    .filter(x -> x.getUuid().equals(uuid))
+                    .findFirst().orElse(null);
+            if (entity == null) {
+                objects.add("Couldn't find entity in world with given uuid");
+                return objects;
+            }
+
+            objects.add(entity.getWorld().getRegistryKey().getValue().toString());
+            return objects;
+        });
+
+        registerPlayerMethods();
+    }
+
+    private void register
+
+    private void registerPlayerMethods() {
         addMethod("get_client_player_uuid", (objects, reply) -> {
             if (objects.size() == 1) {
                 reply.accept(new Package("__invalid_request", "get_client_player_uuid doesn't requires a data arg"));
                 return;
             }
 
-            Session session = MinecraftClient.getInstance().getSession();
-            if (session == null) {
-                reply.accept(new Package("__cant_resolve", "The session was empty"));
+            ClientPlayerEntity player = MinecraftClient.getInstance().player;
+            if (player == null) {
+                reply.accept(new Package("__cant_resolve", "The player didn't get generated yet"));
                 return;
             }
-            UUID uuid = UUID.fromString(session.getUuid());
+            UUID uuid = player.getUuid();
+            if (uuid == null) {
+                reply.accept(new Package("__cant_resolve", "The player didn't hold any uuid"));
+                return;
+            }
             reply.accept(new Package("get_client_player_uuid", uuid));
+        });
+
+        registerEntityGetter("inventory", (uuid) -> {
+            List<Object> objects = new LinkedList<>();
+            //MinecraftClient.getInstance().player.
+            return objects;
+        });
+
+        /* Notifications */
+        registerNoResponse("client_chat", (objects) -> {
+            logger.info("Got request");
+            if (objects.size() <= 0) return;
+            logger.info("Got msg");
+
+            ClientPlayerEntity player = MinecraftClient.getInstance().player;
+            if (player == null) return;
+            logger.info("Got player");
+
+            String message = objects.get(0).toString();
+            logger.info("Sending...");
+            player.sendMessage(Text.literal(message));
+        });
+
+        registerNoResponse("client_actionbar", (objects) -> {
+            if (objects.size() <= 0) return;
+
+            ClientPlayerEntity player = MinecraftClient.getInstance().player;
+            if (player == null) return;
+
+            String message = objects.get(0).toString();
+            player.sendMessage(Text.literal(message), true);
         });
     }
 
