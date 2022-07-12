@@ -56,18 +56,19 @@ class Client:
                     self.waiting_response.get(msg_id)(msg)
                     del self.waiting_response[msg_id]
                 else:
-                    emit_thread = threading.Thread(target=self.execute_event, args=[msg_id])
+                    emit_thread = threading.Thread(target=self.execute_event, args=[msg_id, msg])
                     emit_thread.start()
 
             except socket.timeout:  # Ignored
                 pass
             except ConnectionResetError:
-                print("[INFO]: Server closed. Stopping services")
+                print("[Client]: Server closed. Stopping services")
                 self.connected = False
+                exit()
                 return
 
-    def execute_event(self, event_id):
-        self.handle_event(event_id)
+    def execute_event(self, event_id, msg):
+        self.handle_event(event_id, msg)
 
     def request_float(self, registry: str, index: int, *data) -> float:
         return self.request_item(registry, index, *data)

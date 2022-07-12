@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -16,11 +17,12 @@ import java.util.function.Consumer;
 
 public abstract class AbstractServer implements Runnable {
 
+    protected final Logger logger;
     private final ServerSocket server;
     private final LinkedHashMap<String, BiConsumer<List<Object>, Consumer<Package>>> methods;
-    protected final Logger logger;
-    private Gson gson;
-
+    private final ArrayList<Package> sendToSocket;
+    private final Gson gson;
+    private Thread senderThread;
 
     private Socket connected;
     private boolean running;
@@ -36,20 +38,20 @@ public abstract class AbstractServer implements Runnable {
         this.server = server1;
         this.running = true;
         this.methods = new LinkedHashMap<>();
+        this.sendToSocket = new ArrayList<>();
         this.gson = new Gson();
         this.logger = logger;
     }
 
-    public void sendEvent(Package pack) {
-        if (connected == null || connected.isClosed()) return;
-        PrintWriter outputPipeline = null;
-        try {
-            outputPipeline = new PrintWriter(connected.getOutputStream());
-            outputPipeline.write(packToString(pack));
-            outputPipeline.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void sendPacket(Package pack) {
+        sendToSocket.add(pack);
+        if (senderThread != null && senderThread.isAlive()) return;
+        senderThread = new Thread(() -> {
+            while (sendToSocket.size() != 0) {
+                sendNextPacket();
+            }
+        });
+        senderThread.start();
     }
 
     public void createServer() {
@@ -57,6 +59,7 @@ public abstract class AbstractServer implements Runnable {
     }
 
     private Package parsePackage(@NotNull String raw) throws IOException {
+        logger.info(raw);
         return gson.fromJson(raw, Package.class);
     }
 
@@ -65,9 +68,24 @@ public abstract class AbstractServer implements Runnable {
     }
 
     protected void pythonJoined() {
-
+        // Event overrideable
     }
 
+    private void sendNextPacket() {
+        if (connected == null || connected.isClosed() || sendToSocket.size() == 0) return;
+        PrintWriter outputPipeline;
+        try {
+            Package pack = sendToSocket.get(0);
+            outputPipeline = new PrintWriter(connected.getOutputStream());
+            outputPipeline.write(packToString(pack));
+            outputPipeline.flush();
+
+            sendToSocket.remove(0);
+            Thread.sleep(100);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void worker() throws IOException {
         Socket socket = server.accept();
@@ -87,14 +105,7 @@ public abstract class AbstractServer implements Runnable {
             Package pack = parsePackage(new String(buffer, 0, read));
             logger.info("Received: " + pack.getId());
             if (methods.containsKey(pack.getId())) {
-                methods.get(pack.getId()).accept(pack.getData(), (reply) -> {
-                    try {
-                        outputPipeline.write(packToString(reply));
-                        outputPipeline.flush();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+                methods.get(pack.getId()).accept(pack.getData(), this::sendPacket);
             }
 
         }
