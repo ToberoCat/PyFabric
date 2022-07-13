@@ -81,7 +81,7 @@ public abstract class AbstractServer implements Runnable {
             outputPipeline.flush();
 
             sendToSocket.remove(0);
-            Thread.sleep(100);
+            Thread.sleep(10);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -130,5 +130,10 @@ public abstract class AbstractServer implements Runnable {
 
     public void addMethod(String id, BiConsumer<List<Object>, Consumer<Package>> action) {
         methods.put(id, action);
+    }
+
+
+    public Gson getGson() {
+        return gson;
     }
 }

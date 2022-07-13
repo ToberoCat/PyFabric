@@ -1,8 +1,10 @@
 package io.github.toberocat.pyfabric.server;
 
+import io.github.toberocat.pyfabric.PyFabric;
 import io.github.toberocat.pyfabric.methods.CommandMethods;
-import io.github.toberocat.pyfabric.methods.EntityMethods;
-import io.github.toberocat.pyfabric.methods.PlayerMethods;
+import io.github.toberocat.pyfabric.methods.entity.EntityMethods;
+import io.github.toberocat.pyfabric.methods.entity.InventoryMethods;
+import io.github.toberocat.pyfabric.methods.entity.PlayerMethods;
 import io.github.toberocat.pyfabric.methods.WorldMethods;
 import org.slf4j.Logger;
 
@@ -31,6 +33,7 @@ public class Server extends AbstractServer {
         new EntityMethods(this).register();
         new WorldMethods(this).register();
         new CommandMethods(this).register();
+        new InventoryMethods(this).register();
     }
 
     public boolean alreadyJoined() {
@@ -44,7 +47,10 @@ public class Server extends AbstractServer {
     }
 
     public void disconnectFromServer() {
+        logger.info("Disconnect");
+        if (joinedWorld) sendPacket(new Package("quit"));
         this.joinedWorld = false;
-        sendPacket(new Package("quit"));
+
+        PyFabric.COMMANDS_TO_REGISTER.clear();
     }
 }

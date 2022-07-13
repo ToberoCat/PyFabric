@@ -1,6 +1,6 @@
 from Minecraft.Events.EventType import EventType
 from Minecraft.Networking.Client import Client
-from Minecraft.Entity.Entity import Player, Entity, Location
+from Minecraft.Entity.Entity import Player, Entity
 from pyee.base import EventEmitter
 
 from Minecraft.World.World import ClientWorld
@@ -11,19 +11,27 @@ class Fabric(EventEmitter):
         super().__init__()
         self.client = Client(self.__handle_event__, 1337)
         self.cmd = EventEmitter()
+        self.__client_player__ = None
 
     def __handle_event__(self, event_type: str, packet: dict):
         val = EventType(event_type)
         if val == EventType.ON_COMMAND:
-            self.cmd.emit(packet['data'][0])
+            data = packet['data']
+            if len(data) == 1:
+                self.cmd.emit("/" + data[0][1:], self.get_client_player())
+            else:
+                self.cmd.emit("/" + data[0][1:], self.get_client_player(), data[1:])
         self.emit(val)
 
     def get_client_player(self):
         if not self.client.connected:
             return None
 
-        uuid = self.client.request_string("get_client_player_uuid", 0)
-        return Player(self.client, uuid)
+        if self.__client_player__ is None:
+            uuid = self.client.request_string("get_client_player_uuid", 0)
+            self.__client_player__ = Player(self.client, uuid)
+
+        return self.__client_player__
 
     def get_player(self, uuid: str):
         if not self.client.connected:
@@ -40,8 +48,8 @@ class Fabric(EventEmitter):
             return None
         return ClientWorld(self.client)
 
-    def register_command(self, name: str):
-        self.client.notify_server("register_command", name)
+    def register_command(self, cmd: str):
+        self.client.notify_server("register_command", cmd)
 
 
 def create():

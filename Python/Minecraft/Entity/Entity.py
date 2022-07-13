@@ -24,11 +24,8 @@ class Entity:
         self.client = client
         self.location = Location(uuid, client)
 
-    def get_block_looking_at(self):
-        return self.client.request_string("block_looking_at", 0, self.uuid)
-
     def __str__(self):
-        return "{entity:{uuid:%s,%s}}" % (self.uuid, self.location)
+        return "{entity:{uuid:%s,location:%s}}" % (self.uuid, self.location)
 
 
 class Player(Entity):
@@ -36,14 +33,23 @@ class Player(Entity):
         super(Player, self).__init__(client, uuid)
         self.client = client
 
+    def get_block_looking_at(self):
+        return self.client.request_string("block_looking_at", 0, self.uuid)
+
     def get_dimension(self):
         return self.client.request_string("get_client_player_world", 0)
 
     def send_chat(self, message: str):
+        """
+        Send a message to the player
+
+        Note: messages in minecraft can only be 256 characters long (Socket transfer limit)
+        :param message: The message the player should receive. Use § for colors
+        """
         self.client.notify_server("client_chat", message)
 
     def send_actionbar(self, action_bar):
         self.client.notify_server("client_actionbar", action_bar)
 
-    def get_inventory(self):
-        return Inventory(self.uuid)
+    def get_inventory(self) -> Inventory:
+        return Inventory(self.client, self.uuid)

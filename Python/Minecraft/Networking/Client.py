@@ -1,6 +1,7 @@
 import json
 import socket
 import threading
+import time
 import uuid
 
 from Minecraft.Networking.Response import WaitResponse
@@ -19,9 +20,9 @@ class Client:
         try:
             self.socket.connect(("localhost", port))
         except (ConnectionRefusedError, socket.timeout):
-            print("[ERROR]: Couldn't connect with the fabric mod")
+            print("[Client]: Couldn't connect with the fabric mod")
             self.connected = False
-            return
+            exit(0)
         else:
             print("[Client]: Connect with the PyFabric mod")
 
@@ -64,13 +65,16 @@ class Client:
             except ConnectionResetError:
                 print("[Client]: Server closed. Stopping services")
                 self.connected = False
-                exit()
+                exit(0)
                 return
 
     def execute_event(self, event_id, msg):
         self.handle_event(event_id, msg)
 
     def request_float(self, registry: str, index: int, *data) -> float:
+        return self.request_item(registry, index, *data)
+
+    def request_int(self, registry: str, index: int, *data) -> int:
         return self.request_item(registry, index, *data)
 
     def request_string(self, registry: str, index: int, *data) -> str:
@@ -103,6 +107,7 @@ class Client:
         }
 
         self.socket.send(bytes(json.dumps(packet).encode('utf-8')))
+        time.sleep(0.1)  # Make sure everything got flushed
 
     def request_raw(self, packet: dict) -> dict:
         if not self.connected:
