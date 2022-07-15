@@ -4,7 +4,7 @@ import threading
 import time
 import uuid
 
-from Response import WaitResponse
+from pyfabric.Networking.Response import WaitResponse
 
 
 class ResponseError(Exception):
@@ -24,7 +24,7 @@ class Client:
             self.connected = False
             exit(0)
         else:
-            print("[Client]: Connect with the PyFabric mod")
+            print("[Client]: Connect with the pyfabric mod")
 
         self.handle_event = handle_event
         self.waiting_response = {}

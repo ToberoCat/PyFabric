@@ -2,6 +2,10 @@ from enum import Enum, auto
 
 
 class ArgumentType(Enum):
+
+    def _generate_next_value_(self, start, count, last_values):
+        return self
+
     SUB = auto()
     BOOL = auto()
     FLOAT = auto()
@@ -28,9 +32,6 @@ class ArgumentType(Enum):
     UUID = auto()
     INT_RANGE = auto()
     FLOAT_RANGE = auto()
-
-    def _generate_next_value_(self, start, count, last_values):
-        return self
 
 
 class CommandBuilder:

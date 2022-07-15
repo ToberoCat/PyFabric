@@ -1,6 +1,6 @@
-from src.PyFabric.Command import CommandBuilder, ArgumentType
-import src.PyFabric.Fabric as Fabric
-from src.PyFabric.EventType import EventType
+from src.pyfabric.Command import CommandBuilder, ArgumentType
+import src.pyfabric.Fabric as Fabric
+from src.pyfabric.EventType import EventType
 
 Minecraft = Fabric.create()
 

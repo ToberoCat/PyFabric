@@ -1,8 +1,10 @@
-from Client import Client
-from EventType import EventType
-from Entity import Player, Entity
-from World import ClientWorld
+
 from pyee.base import EventEmitter
+
+from pyfabric.Networking.Client import Client
+from pyfabric.World.World import ClientWorld
+from pyfabric.Events.EventType import EventType
+from pyfabric.Entity.Entity import Player, Entity
 
 
 class Fabric(EventEmitter):
@@ -66,3 +68,4 @@ class Fabric(EventEmitter):
 
 def create():
     return Fabric()
+
