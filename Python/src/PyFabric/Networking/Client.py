@@ -4,7 +4,7 @@ import threading
 import time
 import uuid
 
-from Minecraft.Networking.Response import WaitResponse
+from src.PyFabric.Networking.Response import WaitResponse
 
 
 class ResponseError(Exception):

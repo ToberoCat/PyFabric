@@ -1,5 +1,5 @@
-from Minecraft.Entity.Inventory import Inventory
-from Minecraft.Networking.Client import Client
+from src.PyFabric.Entity.Inventory import Inventory
+from src.PyFabric.Networking.Client import Client
 
 
 class Location:

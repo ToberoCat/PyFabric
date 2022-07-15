@@ -1,6 +1,6 @@
 import time
 
-from Minecraft.Networking.Client import Client
+from src.PyFabric.Networking.Client import Client
 
 
 class ClientWorld:

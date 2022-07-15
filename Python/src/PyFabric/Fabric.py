@@ -1,9 +1,9 @@
-from Minecraft.Events.EventType import EventType
-from Minecraft.Networking.Client import Client
-from Minecraft.Entity.Entity import Player, Entity
+from src.PyFabric.Events.EventType import EventType
+from src.PyFabric.Networking.Client import Client
+from src.PyFabric.Entity.Entity import Player, Entity
 from pyee.base import EventEmitter
 
-from Minecraft.World.World import ClientWorld
+from src.PyFabric.World.World import ClientWorld
 
 
 class Fabric(EventEmitter):

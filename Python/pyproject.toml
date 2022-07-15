@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "PyFabric"
+version = "1.0.0"
+authors = [
+  { name="Tobias Madlberger", email="tobias.madlberger@gmail.com" },
+]
+description = "The python websocket for java minecraft"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/ToberoCat/PyFabric"
+"Documentation" = "https://github.com/ToberoCat/PyFabric/wiki"
+"Bug Tracker" = "https://github.com/ToberoCat/PyFabric/issues"
