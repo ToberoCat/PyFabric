@@ -5,27 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec2e6e03-3a66-46ad-83ab-1945257ee506" name="Changes" comment="Added commands">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/command/JsonCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/command/Type.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/methods/entity/InventoryMethods.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/server/BiReturnConsumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python/Minecraft/Command/Command.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python/test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/PyFabric.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/PyFabric.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/methods/CommandMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/methods/CommandMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/methods/EntityMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/methods/entity/EntityMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/methods/PlayerMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/methods/entity/PlayerMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/mixin/JoinWorldMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/mixin/JoinWorldMixin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/mixin/LeaveWorldMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/mixin/LeaveWorldMixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/server/AbstractServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/server/AbstractServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/toberocat/pyfabric/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/PyFabric.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PyFabric.mixins.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/Minecraft/Entity/Entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/Minecraft/Entity/Entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/Minecraft/Entity/Inventory.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/Minecraft/Entity/Inventory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/Minecraft/Fabric.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/Minecraft/Fabric.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/Minecraft/Networking/Client.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/Minecraft/Networking/Client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/TestCode.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/TestCode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/test.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +24,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="47672" />
+    <option name="totalTimeSeconds" value="47793" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -62,7 +53,7 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Fabric" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="fabric" type="c8890929:TasksNode$1" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -114,7 +105,7 @@
       <recent name="C:\Users\Tobias\Desktop\Development\Minecraft\Fabric\PyFabric\Fabric\src\main\java\io\github\toberocat\pyfabric\task" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Fabric [runClient]">
+  <component name="RunManager" selected="Gradle.Fabric [build]">
     <configuration name="Fabric [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -222,10 +213,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Fabric [build]" />
         <item itemvalue="Gradle.Fabric [runClient]" />
         <item itemvalue="Gradle.Fabric [genSourcesWithFernFlower]" />
         <item itemvalue="Gradle.Fabric [genSources]" />
-        <item itemvalue="Gradle.Fabric [build]" />
         <item itemvalue="Gradle.Fabric [shadowJar]" />
       </list>
     </recent_temporary>
@@ -247,7 +238,9 @@
       <workItem from="1657384633615" duration="90000" />
       <workItem from="1657384739518" duration="240000" />
       <workItem from="1657652814253" duration="13605000" />
-      <workItem from="1657709863317" duration="22563000" />
+      <workItem from="1657709863317" duration="22748000" />
+      <workItem from="1657748033083" duration="576000" />
+      <workItem from="1657787799861" duration="233000" />
     </task>
     <task id="LOCAL-00001" summary="Added chat and actionbar">
       <created>1657273479209</created>

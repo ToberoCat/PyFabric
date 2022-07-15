@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "JoinWorldMixin"
+    "JoinWorldMixin",
+    "LeaveWorldMixin"
   ],
   "injectors": {
     "defaultRequire": 1
