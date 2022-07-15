@@ -1,24 +1,25 @@
 {
   "schemaVersion": 1,
-  "id": "pyfabric",
+  "id": "PyFabric",
   "version": "${version}",
   "name": "PyFabric",
-  "description": "This mod creates a websocket emitting and receiving python websocket requests",
+  "description": "PyFabric is a client sided python websocket data grabber",
   "authors": [
     "Tobero"
   ],
   "contact": {
-    "website": " https://www.paypal.com/donate/?hosted_button_id=BGB6QWR886Q6Y"
+    "website": "https://github.com/ToberoCat/PyFabric",
+    "repo": "https://github.com/ToberoCat/PyFabric"
   },
   "license": "MIT",
   "icon": "assets/PyFabric/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "io.github.toberocat.pyfabric.client.PyFabricClient"
+      "io.github.toberocat.pyfabric.client.PyfabricClient"
     ],
     "main": [
-      "io.github.toberocat.pyfabric.PyFabric"
+      "io.github.toberocat.pyfabric.Pyfabric"
     ]
   },
   "mixins": [

@@ -17,8 +17,7 @@ When picking the folder make sure you can find it again
 In the console run: ``python TestCode.py``.
 - When minecraft fabric with the PyFabric mod gets detected, python will hook into the mod
 and now interacts with it
-- When connected with python joining a world, you should now see something like in ``example_output.png``
-![Example console log](example_output.png)
+- When connected with python joining a world
 
 ## Limitations
 
