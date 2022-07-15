@@ -1,5 +1,5 @@
-from src.PyFabric.Entity.Inventory import Inventory
-from src.PyFabric.Networking.Client import Client
+from Inventory import Inventory
+from Client import Client
 
 
 class Location:

@@ -1,6 +1,6 @@
 import time
 
-from src.PyFabric.Networking.Client import Client
+from Client import Client
 
 
 class ClientWorld:

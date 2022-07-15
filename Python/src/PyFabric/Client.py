@@ -4,7 +4,7 @@ import threading
 import time
 import uuid
 
-from src.PyFabric.Networking.Response import WaitResponse
+from Response import WaitResponse
 
 
 class ResponseError(Exception):
