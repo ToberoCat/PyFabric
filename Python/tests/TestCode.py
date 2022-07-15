@@ -1,6 +1,6 @@
-from pyfabric import Fabric
-from pyfabric.Command.Command import CommandBuilder, ArgumentType
-from pyfabric.Events.EventType import EventType
+from src.PyFabric import Fabric
+from src.PyFabric.Command.Command import CommandBuilder, ArgumentType
+from src.PyFabric.Events.EventType import EventType
 
 Minecraft = Fabric.create()
 
@@ -65,3 +65,6 @@ def tell_armor(player, args):
 @Minecraft.cmd.on("/python slot")
 def tell_slot(player, args):
     player.send_chat(args[0])
+
+
+Minecraft.ready()

@@ -12,8 +12,14 @@ class Fabric(EventEmitter):
         self.client = Client(self.__handle_event__, 1337)
         self.cmd = EventEmitter()
         self.__client_player__ = None
+        self.__ready__ = False
+        self.queue_event = []
 
     def __handle_event__(self, event_type: str, packet: dict):
+        if not self.__ready__:
+            self.queue_event.append((event_type, packet))
+            return
+
         val = EventType(event_type)
         if val == EventType.ON_COMMAND:
             data = packet['data']
@@ -22,6 +28,13 @@ class Fabric(EventEmitter):
             else:
                 self.cmd.emit("/" + data[0][1:], self.get_client_player(), data[1:])
         self.emit(val)
+
+    def ready(self):
+        self.__ready__ = True
+        for event_type, packet in self.queue_event:
+            self.__handle_event__(event_type, packet)
+
+        self.queue_event.clear()
 
     def get_client_player(self):
         if not self.client.connected:
